@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/controller/count_controller.dart';
 import 'package:state_management/view/screens/home_screen.dart';
@@ -7,10 +8,7 @@ import 'package:state_management/view/screens/third_screen.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CountController(),
-      child: const MyApp(),
-    ),
+    const MyApp(),
   );
 }
 
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

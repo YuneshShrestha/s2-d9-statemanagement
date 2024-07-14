@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/controller/count_controller.dart';
 
@@ -7,11 +8,12 @@ class ThirdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var dataListener = Provider.of<CountController>(context, listen: false);
+    
+    var controller = Get.find<CountController>();
     return Scaffold(
       body: Center(
         child: Text(
-          dataListener.getData.toString(),
+          controller.getData.toString(),
           style: Theme.of(context).textTheme.displayLarge,
         ),
       ),
