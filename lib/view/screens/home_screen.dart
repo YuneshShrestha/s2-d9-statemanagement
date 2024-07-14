@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:state_management/controller/count_controller.dart';
 
@@ -7,8 +8,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Rebuilding");
-    var dataListener = Provider.of<CountController>(context, listen: false);
+    // print("Rebuilding");
+    // var dataListener = Provider.of<CountController>(context, listen: false);
+    Get.put(CountController());
+    var controller = Get.find<CountController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Screen"),
@@ -21,27 +24,26 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Consumer<CountController>(
-        builder: (context, value, child) {
-          return Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (child != null) child,
-              Center(
-                child: Text(
-                  // dataListener.getData.toString(),
-                  value.getData.toString(),
-                  style: Theme.of(context).textTheme.displayLarge,
-                ),
-              ),
-            ],
-          );
-        },
-        child: const Text("Hello Number"),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Hello Number"),
+            Obx(
+              () {
+                return Text(
+                  controller.getData.value.toString(),
+                  style: Theme.of(context).textTheme.headlineLarge,
+                );
+              },
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          dataListener.increaseCount();
+          // dataListener.increaseCount();
+          controller.increaseCount();
         },
         child: const Icon(Icons.add),
       ),
